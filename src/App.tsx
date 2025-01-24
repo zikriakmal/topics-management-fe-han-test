@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage'
 import { useEffect } from 'react'
 import TopicsPage from './pages/TopicsPage'
 
+
 function App() {
 
   useEffect(()=>{
