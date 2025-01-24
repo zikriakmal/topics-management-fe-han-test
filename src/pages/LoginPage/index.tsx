@@ -26,7 +26,7 @@ const LoginPage = () => {
                     </div>
                     <div>
                         <button type='submit' onClick={() => console.log('login')} className={`cursor-pointer w-full h-8 bg-[#50b1a9] text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
-                            Register
+                            Login
                         </button>
                     </div>
                 </div>
