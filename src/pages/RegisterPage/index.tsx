@@ -1,11 +1,17 @@
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 import reactLogo from '../../assets/react.svg';
 import Language from '../../components/Language';
-import { useTranslation } from 'react-i18next';
+import Context from '../../context';
 
 const RegisterPage = () => {
     const { t } = useTranslation();
+    const context = useContext(Context);
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-col flex-1 h-svh justify-center items-center">
             <Language />
@@ -34,14 +40,14 @@ const RegisterPage = () => {
                         <input placeholder='Password' type="password" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
                     </div>
                     <div>
-                        <button type='submit' onClick={() => console.log('login')} className={`cursor-pointer w-full h-8 bg-[#50b1a9] text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
+                        <button type='button' onClick={() => context?.setIsLoggedIn(true)} className={`cursor-pointer w-full h-8 bg-[#50b1a9] text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
                             {t('register.button')}
                         </button>
                     </div>
                 </div>
             </form>
             <div className='mt-4 border border-gray-200 w-80 items-center flex-row flex justify-center py-3 bg-gray-50'>
-                <p className='text-sm'>{t('register.already_have_an_account')} <a href="/login" className='text-blue-400'>{t('login.button')}</a></p>
+                <p className='text-sm'>{t('register.already_have_an_account')} <a onClick={() => navigate('/')} className='cursor-pointer text-blue-400'>{t('login.button')}</a></p>
             </div>
         </div>
     )

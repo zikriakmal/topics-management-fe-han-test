@@ -1,14 +1,16 @@
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import reactLogo from '../../assets/react.svg';
 import Language from '../../components/Language';
+import Context from '../../context';
 
 const LoginPage = () => {
-    const navigate = useNavigate();
+    const context = useContext(Context);
     const { t } = useTranslation();
-
+    const navigate = useNavigate();
 
     return (
         <div className="flex flex-col flex-1 h-svh justify-center items-center">
@@ -32,14 +34,14 @@ const LoginPage = () => {
                         <input placeholder='Password' type="password" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
                     </div>
                     <div>
-                        <button type='submit' onClick={() => navigate('/')} className={`cursor-pointer w-full h-8 bg-[#50b1a9] text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
+                        <button type='button' onClick={() => context?.setIsLoggedIn(true)} className={`cursor-pointer w-full h-8 bg-[#50b1a9] text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
                             {t('login.button')}
                         </button>
                     </div>
                 </div>
             </form>
             <div className='mt-4 border border-gray-200 w-80 items-center flex-row flex justify-center py-3 bg-gray-50'>
-                <p className='text-sm'>{t('login.new_to_us')} <a href="/register" className='text-blue-400'>{t('register.button')}</a></p>
+                <p className='text-sm'>{t('login.new_to_us')} <a onClick={() => navigate('/register')} className='cursor-pointer text-blue-400'>{t('register.button')}</a></p>
             </div>
         </div >
     )
