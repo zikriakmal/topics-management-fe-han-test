@@ -1,0 +1,14 @@
+{
+    "welcome": "Welcome",
+    "description": "This is an example application.",
+    "login": {
+        "title": "Log-in to Your account",
+        "button": "Login",
+        "new_to_us": "New to us?"
+    },
+    "register": {
+        "title": "Register Your Account",
+        "button": "Register",
+        "already_have_an_account": "Already Have An Account?"
+    }
+}

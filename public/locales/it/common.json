@@ -1,0 +1,14 @@
+{
+    "welcome": "Welcome Italiano numero uno",
+    "description": "This is an example application.",
+    "login": {
+        "title": "Accedi al tuo account",
+        "button": "Accedi",
+        "new_to_us": "nuovo per noi?"
+    },
+    "register": {
+        "title": "Crea un nuovo account",
+        "button": "Iscriviti",
+        "already_have_an_account": "Hai già un account?"
+    }
+}
