@@ -1,6 +1,5 @@
 {
-    "welcome": "Welcome Italiano numero uno",
-    "description": "This is an example application.",
+    "change_language_to": "Cambia lingua in",
     "login": {
         "title": "Accedi al tuo account",
         "button": "Accedi",
@@ -10,5 +9,15 @@
         "title": "Crea un nuovo account",
         "button": "Iscriviti",
         "already_have_an_account": "Hai già un account?"
+    },
+    "topics": {
+        "form_title_label": "Titolo",
+        "form_description_label": "Descrizione",
+        "form_save_button": "Salva",
+        "list_of_topics": "Elenco degli argomenti",
+        "add_new_button": "Aggiungi nuovo",
+        "logout_button": "Esci",
+        "like_button": "Piacere",
+        "dislike_button": "Non mi piace"
     }
 }

@@ -5,6 +5,7 @@ import Language from "../../components/Language";
 import Modal from "../../components/Modal";
 import Topic from "../../components/Topic";
 import Context from "../../context";
+import { useTranslation } from "react-i18next";
 
 interface TopicList {
     title: string;
@@ -55,6 +56,7 @@ const topicListData: Array<TopicList> = [
 const TopicsPage = () => {
     const context = useContext(Context);
     const modalRef = useRef<{ open: () => void, close: () => void }>(null);
+    const { t } = useTranslation();
 
     const submitForm = () => {
         modalRef?.current?.close();
@@ -70,16 +72,16 @@ const TopicsPage = () => {
                 <form action="">
                     <div className="px-3 py-2 flex flex-col gap-3">
                         <div>
-                            <p className="text-sm mb-1">Title <span className="text-red-500">*</span></p>
-                            <input placeholder='title' type="text" className=" px-2 py-1 w-full rounded border-[0.5px] border-gray-300" />
+                            <p className="text-sm mb-1"> {t('topics.form_title_label')}<span className="text-red-500">*</span></p>
+                            <input placeholder={t('topics.form_title_label')} type="text" className=" px-2 py-1 w-full rounded border-[0.5px] border-gray-300" />
                         </div>
                         <div>
-                            <p className="text-sm mb-1"> Description <span className="text-red-500">*</span></p>
-                            <textarea placeholder='description' className=" px-2 py-1 w-full rounded border-[0.5px] border-gray-300" />
+                            <p className="text-sm mb-1"> {t('topics.form_description_label')} <span className="text-red-500">*</span></p>
+                            <textarea placeholder={t('topics.form_description_label')} className=" px-2 py-1 w-full rounded border-[0.5px] border-gray-300" />
                         </div>
                         <div className="flex flex-row-reverse flex-1">
                             <button type='button' onClick={() => submitForm()} className={`cursor-pointer px-6 h-8 bg-green-500 text-white text-xs rounded font-semibold hover:bg-cyan-900`}>
-                                Save
+                                {t('topics.form_save_button')}
                             </button>
                         </div>
                     </div>
@@ -90,15 +92,15 @@ const TopicsPage = () => {
                     <Language />
                 </div>
                 <div className="flex flex-row justify-between items-center mx-4 mt-5">
-                    <p className="font-bold text-sm sm:text-xl">List of Topics</p>
+                    <p className="font-bold text-sm sm:text-xl">{t('topics.list_of_topics')}</p>
                     <div className="flex flex-row gap-2">
-                        <button className="cursor-pointer bg-green-600 hover:bg-green-900 text-white font-semibold text-xs p-4 py-2 rounded" onClick={() => modalRef?.current?.open()}>
+                        <button className="cursor-pointer bg-green-500 hover:bg-green-900 text-white font-semibold text-xs p-4 py-2 rounded" onClick={() => modalRef?.current?.open()}>
                             <FontAwesomeIcon icon={faAdd} className="pr-2" />
-                            Add new
+                            {t('topics.add_new_button')}
                         </button>
-                        <button className="cursor-pointer bg-red-700 hover:bg-red-900 text-white font-semibold text-xs p-4 py-2 rounded" onClick={() => context?.setIsLoggedIn(false)}>
+                        <button className="cursor-pointer bg-red-600 hover:bg-red-900 text-white font-semibold text-xs p-4 py-2 rounded" onClick={() => context?.setIsLoggedIn(false)}>
                             <FontAwesomeIcon icon={faSignOut} className="pr-2" />
-                            Logout
+                            {t('topics.logout_button')}
                         </button>
                     </div>
                 </div>
