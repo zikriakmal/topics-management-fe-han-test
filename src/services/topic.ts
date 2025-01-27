@@ -20,4 +20,9 @@ const deleteTopicById = async (id: number) => {
     return res;
 }
 
-export { createTopic, getAllTopic, deleteTopicById }
+const likeTopicById = async (id: number, likeType: number) => {
+    const res = await guardApi.post('/api/v1/topics/' + id + '/likes', { likeType: likeType })
+    return res;
+}
+
+export { createTopic, getAllTopic, deleteTopicById, likeTopicById }

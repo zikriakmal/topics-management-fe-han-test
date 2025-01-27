@@ -9,6 +9,7 @@ import reactLogo from '../../assets/react.svg';
 import Language from '../../components/Language';
 import Context from '../../context';
 import { register } from '../../services/public/auth';
+import { AxiosError } from 'axios';
 
 interface SignUpFormValues {
     name: string;
@@ -53,8 +54,13 @@ const RegisterPage = () => {
                         localStorage.setItem('id', res.data?.data?.user?.id)
                         localStorage.setItem('accessToken', res.data?.data?.accessToken)
                     }
-                } catch (e: any) {
-                    if (e?.response?.status === 401) setErrorsApi("Username or password is wrong");
+                } catch (e: unknown) {
+                    if (e instanceof AxiosError) {
+                        if (e?.response?.status === 401) setErrorsApi("Username or password is wrong");
+                        else setErrorsApi(e?.response?.data?.errors ?? "");
+                    } else {
+                        setErrorsApi("An unexpected error occurred.");
+                    }
                 }
                 setSubmitting(false);
             }}>
@@ -70,19 +76,19 @@ const RegisterPage = () => {
                                 <div className='absolute top-1 left-2'>
                                     <FontAwesomeIcon icon={faUser} className='text-gray-500' />
                                 </div>
-                                <input placeholder='Name' value={values.name} onChange={handleChange} name='name' type="name" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
+                                <input placeholder={t('register.form_name_label')} value={values.name} onChange={handleChange} name='name' type="name" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
                             </div>
                             <div className='relative'>
                                 <div className='absolute top-1 left-2'>
                                     <FontAwesomeIcon icon={faEnvelope} className='text-gray-500' />
                                 </div>
-                                <input placeholder='Email' value={values.username} onChange={handleChange} name='username' type="email" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
+                                <input placeholder={t('register.form_email_label')} value={values.username} onChange={handleChange} name='username' type="email" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
                             </div>
                             <div className='relative'>
                                 <div className='absolute top-1 left-2'>
                                     <FontAwesomeIcon icon={faLock} className='text-gray-500' />
                                 </div>
-                                <input placeholder='Password' value={values.password} onChange={handleChange} name='password' type="password" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
+                                <input placeholder={t('register.form_password_label')} value={values.password} onChange={handleChange} name='password' type="password" className="pl-8 px-2 py-1 w-full rounded border-[0.5px]" />
                             </div>
                             <div>
                                 {errorsApi !== "" ? <p className='text-sm text-red-500'>{errorsApi}</p> : null}
