@@ -7,9 +7,9 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import TopicsPage from './pages/TopicsPage'
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [accessToken, setAccessToken] = useState<string>("");
   const navigate = useNavigate();
   const [lang, setLang] = useState<string>("");
 
@@ -17,15 +17,15 @@ function App() {
 
   useEffect(() => {
     changeLanguage(localStorage.getItem('lang') ?? "en");
-    console.log(localStorage.getItem('isLoggedIn'), "wtf was this");
     if (localStorage.getItem('isLoggedIn') === "true") {
       setIsLoggedIn(true);
+      setAccessToken(localStorage.getItem('accessToken') ?? "")
     }
   }, [])
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/'); 
+      navigate('/');
     }
   }, [isLoggedIn]);
 
@@ -45,7 +45,9 @@ function App() {
       lang,
       setLang: changeLanguage,
       isLoggedIn,
-      setIsLoggedIn: changeLoggedInState
+      setIsLoggedIn: changeLoggedInState,
+      accessToken,
+      setAccessToken
     }}>
       <Routes>
         {isLoggedIn ?

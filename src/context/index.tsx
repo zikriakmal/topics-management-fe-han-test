@@ -5,6 +5,8 @@ const Context = createContext<{
     setLang: (lang: string) => void,
     isLoggedIn: boolean,
     setIsLoggedIn: (isLoggedIn: boolean) => void,
+    accessToken: string,
+    setAccessToken: (accessToken: string) => void,
 } | undefined>(undefined);
 
 export default Context;
