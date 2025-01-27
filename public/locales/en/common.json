@@ -1,15 +1,19 @@
 {
-
     "change_language_to": "Change language to",
     "login": {
         "title": "Log-in to Your account",
         "button": "Login",
-        "new_to_us": "New to us?"
+        "new_to_us": "New to us?",
+        "form_email_label": "Email",
+        "form_password_label": "Password"
     },
     "register": {
         "title": "Register Your Account",
         "button": "Register",
-        "already_have_an_account": "Already Have An Account?"
+        "already_have_an_account": "Already Have An Account?",
+        "form_email_label": "Email",
+        "form_password_label": "Password",
+        "form_name_label": "Name"
     },
     "topics": {
         "form_title_label": "Title",

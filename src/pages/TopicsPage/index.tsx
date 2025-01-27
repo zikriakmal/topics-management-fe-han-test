@@ -7,7 +7,8 @@ import Language from "../../components/Language";
 import Modal from "../../components/Modal";
 import Topic from "../../components/Topic";
 import Context from "../../context";
-import { createTopic, getAllTopic } from "../../services/topic";
+import { createTopic, getAllTopic, likeTopicById } from "../../services/topic";
+import { AxiosError } from "axios";
 
 interface TopicDetail {
     id: number;
@@ -20,6 +21,8 @@ interface TopicDetail {
         username: string,
         name: string,
     },
+    like: number,
+    dislike: number,
     formattedUpdatedAtDifference: string,
 }
 
@@ -47,8 +50,10 @@ const TopicsPage = () => {
         })
     }
 
-    const likeTopic = ({ id, isLike }: { id: number, isLike: boolean }) => {
-        console.log(id, isLike, "tessst");
+    const likeTopic = ({ id, likeType }: { id: number, likeType: number }) => {
+        likeTopicById(id, likeType).then(() => {
+            getAll();
+        })
     }
 
     const initialValues: topicFormValues = {
@@ -62,8 +67,12 @@ const TopicsPage = () => {
             modalRef?.current?.close();
             getAll();
             formikRef?.current?.resetForm();
-        } catch (e: any) {
-            setErrorsApi(e?.response?.data?.errors ?? "");
+        } catch (e: unknown) {
+            if (e instanceof AxiosError) {
+                setErrorsApi(e?.response?.data?.errors ?? "");
+            } else {
+                setErrorsApi("An unexpected error occurred.");
+            }
         };
     }
 
@@ -122,8 +131,8 @@ const TopicsPage = () => {
                         <Topic
                             id={dt.id}
                             key={index}
-                            likePercentage={"0"}
-                            dislikePercentage={"0"}
+                            like={Number(dt.like)}
+                            dislike={Number(dt.dislike)}
                             title={dt.title}
                             createdBy={dt.user.name}
                             body={dt.description}
